@@ -2,8 +2,13 @@ package com.github.zqhcxy.recycleviewdemo;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.RadioGroup;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +23,10 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerview;
     private MyRecyclerViewAdapter myRecyclerViewAdapter;
+    private RadioGroup bt_rg;
+    private CheckBox cb_animator;
+
+    DefaultItemAnimator mDefaultItemAnimator = new DefaultItemAnimator();
 
     private List<String> list;
 
@@ -37,6 +46,16 @@ public class MainActivity extends AppCompatActivity {
         recyclerview = (RecyclerView) findViewById(R.id.recyclerview);
         recyclerview.setLayoutManager(new LinearLayoutManager(this));
         recyclerview.setHasFixedSize(true);
+        bt_rg = (RadioGroup) findViewById(R.id.bt_rg);
+        cb_animator = (CheckBox) findViewById(R.id.cb_animator);
+        cb_animator.setEnabled(false);//动画暂时没有实现
+        cb_animator.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                //设置动画
+                recyclerview.setItemAnimator(isChecked ? mDefaultItemAnimator : mDefaultItemAnimator);
+            }
+        });
     }
 
     /**
@@ -49,7 +68,24 @@ public class MainActivity extends AppCompatActivity {
         }
         myRecyclerViewAdapter = new MyRecyclerViewAdapter(this, list, recyclerview);
         recyclerview.setAdapter(myRecyclerViewAdapter);
+        recyclerview.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                Log.i("recyclerScroll", dx + ":" + dy);
+            }
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                Log.i("recyclerScroll", newState + "");
+            }
+        });
     }
 
+
+    public int getCheckMode() {
+        return bt_rg.getCheckedRadioButtonId();
+    }
 
 }
