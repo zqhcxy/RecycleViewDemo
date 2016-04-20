@@ -1,6 +1,8 @@
 package com.github.zqhcxy.recycleviewdemo;
 
 import android.os.Bundle;
+import android.os.Message;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,16 +21,34 @@ import java.util.List;
  * @author zqhcxy
  *         Created by zqhcxy on 2016/4/19.
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
 
     private RecyclerView recyclerview;
     private MyRecyclerViewAdapter myRecyclerViewAdapter;
     private RadioGroup bt_rg;
     private CheckBox cb_animator;
+    private LinearLayoutManager layoutManager;
+    private SwipeRefreshLayout refresh_ly;
 
     DefaultItemAnimator mDefaultItemAnimator = new DefaultItemAnimator();
 
     private List<String> list;
+    private int lastVisibleItem;
+    private android.os.Handler handler = new android.os.Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 0://下啦
+                    Log.i("zqh", "啊啦啦啦德玛西亚");
+                    refresh_ly.setRefreshing(false);
+                    break;
+                case 1://上啦
+                    Log.i("zqh", "我的大刀");
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +64,10 @@ public class MainActivity extends AppCompatActivity {
      */
     private void findView() {
         recyclerview = (RecyclerView) findViewById(R.id.recyclerview);
-        recyclerview.setLayoutManager(new LinearLayoutManager(this));
+        refresh_ly = (SwipeRefreshLayout) findViewById(R.id.refresh_ly);
+
+        layoutManager = new LinearLayoutManager(this);
+        recyclerview.setLayoutManager(layoutManager);
         recyclerview.setHasFixedSize(true);
         bt_rg = (RadioGroup) findViewById(R.id.bt_rg);
         cb_animator = (CheckBox) findViewById(R.id.cb_animator);
@@ -56,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
                 recyclerview.setItemAnimator(isChecked ? mDefaultItemAnimator : mDefaultItemAnimator);
             }
         });
+
+        refresh_ly.setOnRefreshListener(this);
     }
 
     /**
@@ -73,12 +98,17 @@ public class MainActivity extends AppCompatActivity {
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 Log.i("recyclerScroll", dx + ":" + dy);
+                lastVisibleItem = layoutManager.findLastVisibleItemPosition();
             }
 
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 Log.i("recyclerScroll", newState + "");
+
+                if (newState == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItem + 1 == myRecyclerViewAdapter.getItemCount()) {
+                    handler.sendEmptyMessageDelayed(1, 3000);
+                }
             }
         });
     }
@@ -87,5 +117,11 @@ public class MainActivity extends AppCompatActivity {
     public int getCheckMode() {
         return bt_rg.getCheckedRadioButtonId();
     }
+
+    @Override
+    public void onRefresh() {
+        handler.sendEmptyMessageDelayed(0, 3000);
+    }
+
 
 }
