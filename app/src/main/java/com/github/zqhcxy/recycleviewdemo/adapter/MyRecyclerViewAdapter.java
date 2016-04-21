@@ -1,4 +1,4 @@
-package com.github.zqhcxy.recycleviewdemo;
+package com.github.zqhcxy.recycleviewdemo.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -7,6 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.github.zqhcxy.recycleviewdemo.MyClicekListener;
+import com.github.zqhcxy.recycleviewdemo.R;
+import com.github.zqhcxy.recycleviewdemo.activity.RecyclerViewActivity;
 
 import java.util.List;
 
@@ -18,14 +22,14 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     private List<String> mList;
     private Context mContext;
     private RecyclerView recyclerview;
-    private MainActivity mainActivity;
+    private RecyclerViewActivity recyclerViewActivity;
 
 
     public MyRecyclerViewAdapter(Context context, List<String> list, RecyclerView recyclerview) {
         mList = list;
         mContext = context;
         this.recyclerview = recyclerview;
-        this.mainActivity = (MainActivity) context;
+        this.recyclerViewActivity = (RecyclerViewActivity) context;
     }
 
 
@@ -47,7 +51,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
                     if (isLongClick) {
                         Toast.makeText(mContext, "长按" + mList.get(position), Toast.LENGTH_SHORT).show();
                     } else {//  单击
-                        switch (mainActivity.getCheckMode()) {
+                        switch (recyclerViewActivity.getCheckMode()) {
                             case R.id.rb_itemclick:
                                 Toast.makeText(mContext, "点击" + mList.get(position), Toast.LENGTH_SHORT).show();
                                 break;

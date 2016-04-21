@@ -1,4 +1,4 @@
-package com.github.zqhcxy.recycleviewdemo;
+package com.github.zqhcxy.recycleviewdemo.activity;
 
 import android.os.Bundle;
 import android.os.Message;
@@ -12,16 +12,21 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.RadioGroup;
 
+import com.github.zqhcxy.recycleviewdemo.adapter.MyRecyclerViewAdapter;
+import com.github.zqhcxy.recycleviewdemo.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * RecycleView Demo
+ * 普通的RecycleView Demo
+ * <p>简单的实现RecyclerView的显示、添加、删除功能、动画。
  *
  * @author zqhcxy
  *         Created by zqhcxy on 2016/4/19.
+ * @version 1.1
  */
-public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
+public class RecyclerViewActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
 
     private RecyclerView recyclerview;
     private MyRecyclerViewAdapter myRecyclerViewAdapter;
@@ -53,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_recyclernomal);
 
         findView();
         initData();

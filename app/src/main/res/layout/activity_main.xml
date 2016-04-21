@@ -4,61 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.github.zqhcxy.recycleviewdemo.MainActivity">
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.github.zqhcxy.recycleviewdemo.activity.MainActivity">
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/refresh_ly"
+    <Button
+        android:id="@+id/nomal_Recyler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/bt_rg">
-
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            />
-    </android.support.v4.widget.SwipeRefreshLayout>
-
-    <RadioGroup
-        android:id="@+id/bt_rg"
-        android:layout_width="wrap_content"
+        android:text="简单的RecyclerView功能实现"/>
+    <Button
+        android:layout_below="@id/nomal_Recyler"
+        android:id="@+id/typs_Recyler"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:orientation="horizontal">
-
-        <RadioButton
-            android:id="@+id/rb_itemclick"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="点击事件"/>
-
-        <RadioButton
-            android:id="@+id/rb_itemdelete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="删除模式"/>
-
-        <RadioButton
-            android:id="@+id/rb_itemadd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="添加模式"/>
-
-        <RadioButton
-            android:id="@+id/rb_itemchange"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="改变数据"/>
-    </RadioGroup>
-
-    <CheckBox
-        android:id="@+id/cb_animator"
-        android:layout_width="wrap_content"
+        android:text="多类型的RecyclerView功能实现"/>
+    <Button
+        android:layout_below="@id/typs_Recyler"
+        android:id="@+id/cursor_Recyler"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/bt_rg"
-        android:layout_toRightOf="@+id/bt_rg"
-        android:text="动画"
-        android:visibility="gone"/>
+        android:text="CursorAdapter的RecyclerView功能实现"/>
 
 </RelativeLayout>
