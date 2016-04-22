@@ -51,7 +51,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent1);
                 break;
             case R.id.cursor_Recyler:
-
+                Intent intent2 = new Intent(MainActivity.this, CursorRecylerViewActivity.class);
+                startActivity(intent2);
                 break;
 
         }

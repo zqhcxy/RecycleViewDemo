@@ -12,8 +12,8 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.RadioGroup;
 
-import com.github.zqhcxy.recycleviewdemo.adapter.MyRecyclerViewAdapter;
 import com.github.zqhcxy.recycleviewdemo.R;
+import com.github.zqhcxy.recycleviewdemo.adapter.MyRecyclerViewAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,6 +71,7 @@ public class RecyclerViewActivity extends AppCompatActivity implements SwipeRefr
         recyclerview = (RecyclerView) findViewById(R.id.recyclerview);
         refresh_ly = (SwipeRefreshLayout) findViewById(R.id.refresh_ly);
 
+        //横向和纵向
         layoutManager = new LinearLayoutManager(this);
         recyclerview.setLayoutManager(layoutManager);
         recyclerview.setHasFixedSize(true);
@@ -93,7 +94,7 @@ public class RecyclerViewActivity extends AppCompatActivity implements SwipeRefr
      */
     private void initData() {
         list = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 60; i++) {
             list.add("item" + i);
         }
         myRecyclerViewAdapter = new MyRecyclerViewAdapter(this, list, recyclerview);
