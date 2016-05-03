@@ -8,7 +8,7 @@ RecycleViewDemo
     主要内容是RcyclerView 的使用：
 ##a、分为简单的显示使用：
           item的添加、删除、修改、点击事件.
-          ![](https://github.com/zqhcxy/RecyclerViewDemo/raw/master/Picture/Screenshot_20160503-100715.png)  
+          ![](https://github.com/zqhcxy/RecycleViewDemo/raw/master/Picture/Screenshot_20160503-100715.png)  
 ##b、多类型item。
 ##c、RecyclerView的CursorAdapter使用。
 
