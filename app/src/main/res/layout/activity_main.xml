@@ -15,17 +15,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="简单的RecyclerView功能实现"/>
+
     <Button
-        android:layout_below="@id/nomal_Recyler"
         android:id="@+id/typs_Recyler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="多类型的RecyclerView功能实现"/>
+        android:layout_below="@id/nomal_Recyler"
+        android:text="简单的多类型的RecyclerView功能实现"/>
+
     <Button
-        android:layout_below="@id/typs_Recyler"
         android:id="@+id/cursor_Recyler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/typs_Recyler"
         android:text="CursorAdapter的RecyclerView功能实现"/>
+
+    <Button
+        android:id="@+id/heads_Recyler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cursor_Recyler"
+        android:text="带有头部布局的RecyclerView功能实现"/>
 
 </RelativeLayout>

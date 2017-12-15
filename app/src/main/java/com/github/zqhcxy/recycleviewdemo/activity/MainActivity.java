@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button nomal_Recyler;
     private Button typs_Recyler;
     private Button cursor_Recyler;
+    private Button heads_Recyler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +34,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         nomal_Recyler = (Button) findViewById(R.id.nomal_Recyler);
         typs_Recyler = (Button) findViewById(R.id.typs_Recyler);
         cursor_Recyler = (Button) findViewById(R.id.cursor_Recyler);
+        heads_Recyler = (Button) findViewById(R.id.heads_Recyler);
 
         nomal_Recyler.setOnClickListener(this);
         typs_Recyler.setOnClickListener(this);
         cursor_Recyler.setOnClickListener(this);
+        heads_Recyler.setOnClickListener(this);
     }
 
     @Override
@@ -53,6 +56,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.cursor_Recyler:
                 Intent intent2 = new Intent(MainActivity.this, CursorRecylerViewActivity.class);
                 startActivity(intent2);
+                break;
+            case R.id.heads_Recyler:
+                Intent intent3 = new Intent(MainActivity.this, HeadRecyclerViewActivity.class);
+                startActivity(intent3);
                 break;
 
         }
