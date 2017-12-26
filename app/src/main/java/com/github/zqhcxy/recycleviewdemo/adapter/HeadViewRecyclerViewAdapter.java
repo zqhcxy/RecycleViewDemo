@@ -14,6 +14,8 @@ import com.github.zqhcxy.recycleviewdemo.R;
 import com.github.zqhcxy.recycleviewdemo.mode.HeadViewMode;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by zqh on 2017/12/15.
@@ -28,16 +30,23 @@ public class HeadViewRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
     ArrayList<HeadViewMode> headViewModes;
     LayoutInflater inflater;
 
+    private Map<Integer,View> headViews;
+
 
     public HeadViewRecyclerViewAdapter(Context context, ArrayList<HeadViewMode> lists) {
         mContext = context;
         headViewModes = lists;
         inflater = LayoutInflater.from(context);
+        headViews=new HashMap<>();
     }
 
     @Override
     public int getItemViewType(int position) {
         return headViewModes.get(position).getType();
+    }
+
+    public HeadViewMode getItemData(int position){
+        return headViewModes.get(position);
     }
 
     @Override
@@ -63,6 +72,8 @@ public class HeadViewRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
             itemViewHolder.mTitle.setText(headViewMode.getTitle());
             itemViewHolder.mImageView.setImageResource(headViewMode.getResulseId());
         } else if(type==HEADVIEW_TYPE){
+            holder.itemView.setTag(position);
+            headViews.put(position,holder.itemView);
             HeadViewHolder headViewHolder= (HeadViewHolder) holder;
             headViewHolder.mHeadViewTitle.setText(headViewMode.getTitle());
             headViewHolder.mButton.setOnClickListener(new View.OnClickListener() {
@@ -80,6 +91,23 @@ public class HeadViewRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
             return headViewModes.size();
         }
         return 0;
+    }
+
+    public View getHeadView(int position){
+        return headViews.get(position);
+    }
+
+    @Override
+    public void onViewRecycled(RecyclerView.ViewHolder holder) {
+        super.onViewRecycled(holder);
+        if(holder instanceof HeadViewHolder) {
+            try {
+                int tag = (int) holder.itemView.getTag();
+                headViews.remove(tag);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public class HeadViewHolder extends RecyclerView.ViewHolder {
